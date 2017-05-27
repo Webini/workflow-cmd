@@ -10,17 +10,14 @@ module.exports = async function(parameters = {}) {
     term('\nEnter lambda path : ');
     filepath = await term.fileInputAsync({ cancelable: true });
   }
-  
-  let code = null;
-  try {
-    code = fs.readFileSync(filepath, 'UTF-8');
-  } catch(e) {
-    throw new Error('File not found');
+  console.log(filepath);
+  if (!fs.existsSync(filepath)) {
+    throw new Error('Lambda file not found');
   }
 
   return { 
     configuration: {
-      code: code
+      file: filepath
     }
   };
 };

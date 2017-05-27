@@ -1,5 +1,5 @@
 {
-  "name": "workflow-api",
+  "name": "workflow-cmd",
   "version": "1.0.0",
   "description": "",
   "main": "run.js",

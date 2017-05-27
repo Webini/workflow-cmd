@@ -2,6 +2,7 @@ const term = require('../../term.js');
 const selectApi = require('../select-api.js');
 const selectParameter = require('../../utils/selectParameter.js');
 const getParameter = require('../../utils/getParameter.js');
+const methods = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'CONNECT', 'OPTIONS', 'TRACE' ];
 
 module.exports = async function(parameters = {}) {
   const api = require('../../api.js');
@@ -17,7 +18,7 @@ module.exports = async function(parameters = {}) {
     parameters, 
     name: 'apiMethod', 
     label: 'Please enter your api method',
-    choices: [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'CONNECT', 'OPTIONS', 'TRACE' ] 
+    choices: methods
   });
 
   const apiData = await api.getApi({ 
@@ -35,6 +36,8 @@ module.exports = async function(parameters = {}) {
 
 module.exports.help = function() {
   term(
-`      ^g --api-id=<id>^:                    api id 
-      ^g --api-endpoint=</get/:custom_id>^: api endpoint\n`);
+`      ^g--api-id=<id>^:                    api id 
+      ^g--project-id=<id>^:                Project id 
+      ^g--api-endpoint=</get/:custom_id>^:   Api endpoint
+      ^g--api-method=<${methods.join(',')}>^: Api method\n`);
 };

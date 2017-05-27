@@ -5,11 +5,13 @@ const fs = require('fs');
 
 describe('apikey', () => {
   const originalApiKey = process.env.API_KEY;
-  process.env.HOME = __dirname;
-  process.env.API_KEY = 'test env apikey';
   const filename = `.${package.name}`;
   const filepath = path.join(process.env.HOME, filename);
   const apikey = require('../src/apikey.js');
+
+  before(() => {
+    process.env.API_KEY = 'test env apikey';
+  });
 
   after(() => {
     apikey.set(originalApiKey);

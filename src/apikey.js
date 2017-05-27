@@ -10,14 +10,14 @@ let key = process.env.API_KEY;
 
 module.exports = {
   get: function(assert = true) {
-    if (key === null) {
+    if (key === undefined) {
       try {
         key = fs.readFileSync(filepath, 'UTF-8');
       } catch(e) { 
         debug('cannot read key %o', e.message);
       }
     }
-    if (key === null && assert) {
+    if (key === undefined && assert) {
       throw new Error('Missing apikey, please use command configure to set it up.');
     }
     return key;
