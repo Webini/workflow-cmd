@@ -1,0 +1,32 @@
+{
+  "name": "workflow-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "run.js",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "debug": "^2.6.8",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4",
+    "terminal-kit": "^1.8.12"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "mocha": "^3.2.0",
+    "nock": "^9.0.13",
+    "should": "^11.2.1"
+  },
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Webini/workflow-cmd.git"
+  },
+  "author": "GASPARINI Nicolas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Webini/workflow-cmd/issues"
+  },
+  "homepage": "https://github.com/Webini/workflow-cmd#readme"
+}

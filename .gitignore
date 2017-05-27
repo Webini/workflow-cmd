@@ -1,0 +1,9 @@
+node_modules
+.env
+.env.test
+.env.dev
+src/config
+.vscode
+.directory
+data
+.queues
