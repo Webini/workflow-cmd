@@ -48,7 +48,7 @@ module.exports = async function(parameters = {}) {
 };
 
 module.exports.help = function() {
-  term.brightWhite('workflow-push')(`
+  term.brightWhite('push')(`
   Send workflow to the server
   parameters :
     ^g--project-id=<id>^:    Project id\n

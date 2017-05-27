@@ -28,7 +28,7 @@ module.exports = async function(parameters = {}) {
 };
 
 module.exports.help = function() {
-  term.brightWhite('workflow-init')(`
+  term.brightWhite('init')(`
   Create a new workflow
   parameters :   
     ^g--workflow-name=<name>^: Your new workflow name 
