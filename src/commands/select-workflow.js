@@ -1,19 +1,19 @@
 const term = require('../term.js');
+const selectProject = require('./select-project.js');
+const createWorkflow = require('./create-workflow.js');
 
-module.exports = async function(parameters = { 'can-create': true }) {
+module.exports = async function(parameters = { canCreate: true }) {
   const api = require('../api.js');
-  const selectProject = require('./select-project.js');
-  const createWorkflow = require('./create-workflow.js');
-  const canCreate = !!parameters['can-create'];
+  const canCreate = !!parameters.canCreate;
 
-  const projectId = await selectProject(parameters);
+  await selectProject(parameters);
 
-  if (parameters['workflow-id']) {
-    return { projectId, workflowId: parameters['workflow-id'] };
-  }
+  if (parameters.workflowId) {
+    return parameters.workflowId;
+  } 
 
   const { count, data: workflows }  = await api.searchWorkflows({ 
-    project_id: projectId,
+    project_id: parameters.projectId,
     body: { limit: 50 } 
   });
   term('\nSelect workflow\n');
@@ -30,18 +30,14 @@ module.exports = async function(parameters = { 'can-create': true }) {
   term('\n');
   
   if (result.selectedIndex === workflows.length && canCreate) {
-    return {
-      projectId,
-      workflow: (await createWorkflow(parameters)).id
-    }; 
+    parameters.workflowId = (await createWorkflow(parameters)).id;
   } else if(result.selectedIndex === workflows.length + (canCreate ? 1 : 0)) {
     throw new Error('Cancelled');
   } else {
-    return { 
-      projectId, 
-      workflowId: workflows[result.selectedIndex].id
-    };
+    parameters.workflowId = workflows[result.selectedIndex].id;
   }
+
+  return parameters.workflowId;
 };
 
-//module.exports.private = true;
+module.exports.private = true;

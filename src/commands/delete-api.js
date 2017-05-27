@@ -1,27 +1,29 @@
 const term = require('../term.js');
-const selectProject = require('./select-project.js');
+const selectApi = require('./select-api.js');
 
 module.exports = async function(parameters = {}) {
   const api = require('../api.js');
   parameters.canCreate = false;
 
-  const projectId = await selectProject(parameters);
-
+  await selectApi(parameters);
+  
   term('\nAre you sure ? [Y|n] \n');
   if (parameters.nonInteractive || await term.yesOrNoAsync({ yes: [ 'y', 'Y', 'ENTER' ], no: [ 'n' ] })) {
-    await api.deleteProject({ 
-      project_id: projectId
+    await api.deleteApi({ 
+      project_id: parameters.projectId,
+      api_id: parameters.apiId
     });
 
-    term('Project ').yellow(`#${projectId}`)(' deleted \n\n');
+    term('Api ').yellow(`#${parameters.apiId}`)(' deleted \n\n');
   } else {
     throw new Error('Cancelled');
   }
 };
 
 module.exports.help = function() {
-  term.brightWhite('delete-project')(`
-  delete project
-  parameters :
-    ^g--project-id=<id>^:  project id\n\n`);
+  term.brightWhite('delete-api')(`
+  Delete an api
+  parameters :   
+    ^g--api-id=<id>^:      Api id
+    ^g--project-id=<id>^:  Project id \n\n`);
 };

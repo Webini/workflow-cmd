@@ -4,12 +4,12 @@ module.exports = async ({ parameters = {}, name, label, forceInput = false, requ
   const output = Object.assign({}, parameters);
   let value = null;
 
-  if (!output || !output[name] || forceInput) {
+  if ((!output || !output[name] || forceInput) && !parameters.nonInteractive) {
     term.white(`\n${label} : `);
     value = await term.inputFieldAsync({ default: output[name] || '', cancelable: true });
     term('\n');
   } else {
-    value = output[name];
+    value = output[name] || '';
   }
 
   if (value) {

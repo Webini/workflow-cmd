@@ -1,12 +1,12 @@
 const term = require('../term.js');
+const createProject = require('./create-project.js');
 
-module.exports = async function(parameters = { 'can-create': true }) {
+module.exports = async function(parameters = { canCreate: true }) {
   const api = require('../api.js');
-  const createProject = require('./create-project.js');
-  const canCreate = !!parameters['can-create'];
+  const canCreate = !!parameters.canCreate;
 
-  if (parameters['project-id']) {
-    return parameters['project-id'];
+  if (parameters.projectId) {
+    return parameters.projectId;
   }
 
   const { count, data: projects }  = await api.searchProjects({ body: { limit: 50 } });
@@ -24,12 +24,14 @@ module.exports = async function(parameters = { 'can-create': true }) {
   term('\n');
   
   if (result.selectedIndex === projects.length && canCreate) {
-    return (await createProject()).id; 
+    parameters.projectId = (await createProject()).id; 
   } else if(result.selectedIndex === projects.length + (canCreate ? 1 : 0)) {
     throw new Error('Cancelled');
   } else {
-    return projects[result.selectedIndex].id;
+    parameters.projectId = projects[result.selectedIndex].id;
   }
+
+  return parameters.projectId;
 };
 
 module.exports.private = true;

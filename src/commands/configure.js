@@ -15,5 +15,5 @@ module.exports.help = function() {
   term.brightWhite('configure')(`
   configure this computer with your token
   parameters :   
-    `).green('[optional] --api-key=<apiKey>')(' Your api key\n\n');
+    `).green('--api-key=<apiKey>')(' Your api key\n\n');
 };

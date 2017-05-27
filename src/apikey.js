@@ -6,7 +6,7 @@ const homepath = process.env.HOMEPATH || process.env.HOME;
 const filepath = path.join(homepath, keyfile);
 const debug = require('./debug.js');
 
-let key = null;
+let key = process.env.API_KEY;
 
 module.exports = {
   get: function(assert = true) {
