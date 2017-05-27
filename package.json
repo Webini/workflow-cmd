@@ -1,5 +1,5 @@
 {
-  "name": "workflow-cmd",
+  "name": "workflow",
   "version": "1.0.0",
   "description": "",
   "main": "run.js",
@@ -9,6 +9,9 @@
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4",
     "terminal-kit": "^1.8.12"
+  },
+  "bin": {
+    "workflow": "./run.sh"
   },
   "devDependencies": {
     "eslint": "^3.19.0",

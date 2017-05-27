@@ -10,7 +10,7 @@ module.exports = async function(parameters = {}) {
     term('\nEnter lambda path : ');
     filepath = await term.fileInputAsync({ cancelable: true });
   }
-  console.log(filepath);
+  
   if (!fs.existsSync(filepath)) {
     throw new Error('Lambda file not found');
   }
