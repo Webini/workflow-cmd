@@ -43,7 +43,9 @@ module.exports = async function(parameters = {}) {
     body: workflow.normalizeForServer()
   });
 
-  term(`\nWorkflow ^b${workflow.getName()}^: updated\n\n`);
+  term(`\nWorkflow ^b${workflow.getName()}^: ${workflowId ? 'updated' : 'created'}\n`);
+  term('Url : ').green(`${api.URL}/hook/${result.guid}\n\n`);
+
   return result;
 };
 

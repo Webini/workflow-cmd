@@ -1,7 +1,7 @@
 const request = require('request-promise-native');
 const debug   = require('./debug.js');
 
-const API_URL = process.env.API_URL || 'http://127.0.0.1:8080/api';
+const WORKFLOW_API_URL = process.env.WORKFLOW_API_URL || 'http://127.0.0.1:8080';
 
 const API_ENDPOINTS = {
   getProjects: {
@@ -108,7 +108,7 @@ const API_ENDPOINTS = {
 };
 
 function callServer(apiKey, params, endpoint) {
-  const uri = API_URL + endpoint.path
+  const uri = `${WORKFLOW_API_URL}/api${endpoint.path}`
     .replace(':item_id', params.item_id)
     .replace(':workflow_id', params.workflow_id)
     .replace(':project_id', params.project_id)
@@ -130,6 +130,7 @@ function callServer(apiKey, params, endpoint) {
 
 function Api(apiKey) {
   this.apiKey = apiKey;
+  this.URL = WORKFLOW_API_URL;
 }
 
 Object.keys(API_ENDPOINTS).forEach((value) => {
