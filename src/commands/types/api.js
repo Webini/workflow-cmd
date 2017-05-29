@@ -29,7 +29,7 @@ module.exports = async function(parameters = {}) {
   return { 
     name: apiData.name,
     configuration: {
-      endpoint, method 
+      path: endpoint, method 
     }
   };
 };
