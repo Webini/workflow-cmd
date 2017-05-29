@@ -50,7 +50,7 @@ module.exports = async function(parameters = {}) {
 };
 
 module.exports.help = function() {
-  term.brightWhite('push')(`
+  term.brightWhite('publish')(`
   Send workflow to the server
   parameters :
     ^g--project-id=<id>^:    Project id\n

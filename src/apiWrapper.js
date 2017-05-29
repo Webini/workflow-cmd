@@ -79,29 +79,29 @@ const API_ENDPOINTS = {
     path: '/projects/:project_id/workflows/:workflow_id'
   },
 
-  getItems: {
+  getMessages: {
     method: 'GET',
-    path: '/projects/:project_id/workflows/:workflow_id/items',
+    path: '/projects/:project_id/workflows/:workflow_id/messages',
   },
-  searchItems: {
+  searchMessages: {
     method: 'POST',
-    path: '/projects/:project_id/workflows/:workflow_id/items',
+    path: '/projects/:project_id/workflows/:workflow_id/messages',
   },
-  createItem: {
+  createMessages: {
     method: 'PUT',
-    path: '/projects/:project_id/workflows/:workflow_id/items'
+    path: '/projects/:project_id/workflows/:workflow_id/messages'
   },
-  getItem: {
+  getMessage: {
     method: 'GET',
-    path: '/projects/:project_id/workflows/:workflow_id/items/:item_id'
+    path: '/projects/:project_id/workflows/:workflow_id/messages/:message_id'
   },
-  deleteItem: {
+  deleteMessage: {
     method: 'DELETE',
-    path: '/projects/:project_id/workflows/:workflow_id/items/:item_id'
+    path: '/projects/:project_id/workflows/:workflow_id/messages/:message_id'
   },
-  updateItem: {
+  updateMessage: {
     method: 'PUT',
-    path: '/projects/:project_id/workflows/:workflow_id/items/:item_id'
+    path: '/projects/:project_id/workflows/:workflow_id/messages/:message_id'
   }
 
 
@@ -109,7 +109,7 @@ const API_ENDPOINTS = {
 
 function callServer(apiKey, params, endpoint) {
   const uri = `${WORKFLOW_API_URL}/api${endpoint.path}`
-    .replace(':item_id', params.item_id)
+    .replace(':message_id', params.message_id)
     .replace(':workflow_id', params.workflow_id)
     .replace(':project_id', params.project_id)
     .replace(':api_id', params.api_id)

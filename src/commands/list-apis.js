@@ -15,7 +15,28 @@ module.exports = async function(parameters = {}) {
   term(`\n${count} api(s) found\n\n`);
 
   apis.forEach((api) => {
-    term.yellow(`#${api.id}`).bold(` ${api.name}`)('\n');
+    term.yellow(`#${api.id}`).bold(` ${api.name}`)(`
+  Host: ${api.host}
+  Headers:`);
+    Object
+      .keys(api.headers || {})
+      .forEach((name) => {
+        term(`
+    ${name}: ${api.headers[name]}`);
+      })
+    ;
+
+    term(`
+  Query string : `);
+    Object
+      .keys(api.qs || {})
+      .forEach((name) => {
+        term(`
+    ${name}: ${api.qs[name]}`);
+      })
+    ;
+
+    term('\n');
   });
 
   term('\n');
