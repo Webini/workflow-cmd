@@ -35,7 +35,7 @@ module.exports = async function(parameters = {}) {
 
   messages.forEach((message) => {
     term.yellow(`# ${message.id}`).bold(` ${status.vk[message.status]}`);
-    if (message.error) {
+    if (message.error && message.status === status.kv.error) {
       term.red(` ${message.error}`);
     }
     term.gray(` (${new Date(message.updated_at)})\n`);
