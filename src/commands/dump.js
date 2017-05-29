@@ -1,6 +1,5 @@
 const term = require('../term.js');
 const selectMessage = require('./select-message.js');
-const status = require('../utils/status.js');
 const path = require('path');
 const fs = require('fs');
 
@@ -16,7 +15,8 @@ module.exports = async function(parameters = {}) {
     message_id: parameters.messageId
   });
 
-  const file = parameters.outputFile || path.join(process.cwd(), `${message.id}.json`);
+  const dumpResult = !!parameters.result; 
+  const file = parameters.outputFile || path.join(process.cwd(), `${message.id}.${dumpResult ? 'result.' : ''}json`);
   
   if (fs.existsSync(file)) {
     let replace = parameters.forceReplace;
@@ -29,18 +29,19 @@ module.exports = async function(parameters = {}) {
     }
   }
 
-  fs.writeFileSync(file, JSON.stringify(message.content, null, 4));
+  fs.writeFileSync(file, JSON.stringify((dumpResult ? message.result : message.content), null, 4));
 
   term(`\nmessage ${message.id} dumped in ${file}\n\n`);
 };
 
 module.exports.help = function() {
   term.brightWhite('dump')(`
-  Dump message
+  Dump original request message
   parameters :   
     ^g--project-id=<id>^:        Project id 
     ^g--workflow-id=<id>^:       Workflow id
     ^g--output-file=<filepath>^: Output file
     ^g--message-id=<id>^:        Message id
+    ^g--result^:                 Dump workflow result
     ^g--force-replace            Replace file if already preset\n\n`);
 };
