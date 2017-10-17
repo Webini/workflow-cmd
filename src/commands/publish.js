@@ -53,6 +53,7 @@ module.exports.help = function() {
   term.brightWhite('publish')(`
   Send workflow to the server
   parameters :
-    ^g--project-id=<id>^:    Project id\n
-    ^g--force-replace        Replace workflow if already present\n\n`);
+    ^g--workflow-file=<file>: Worfklow json file
+    ^g--project-id=<id>^:     Project id\n
+    ^g--force-replace         Replace workflow if already present\n\n`);
 };

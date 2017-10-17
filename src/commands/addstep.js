@@ -34,7 +34,7 @@ module.exports = async function(parameters = {}) {
 };
 
 module.exports.help = function() {
-  term.brightWhite('workflow-addstep')(`
+  term.brightWhite('addstep')(`
   Add step to the workflow
   parameters :   
     ^g--workflow-file=<file>^:              Your workflow.json file
